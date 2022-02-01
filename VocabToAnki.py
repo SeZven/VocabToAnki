@@ -3,6 +3,7 @@ import cv2, pytesseract
 import os
 import genanki
 import random
+from datetime import datetime
 
 """
 Turn vocabulary sheet image into string.
@@ -96,5 +97,33 @@ cards = creatAnkiData(result)
 
 print(cards)
 
-def creatAnkiDeck(cards):
+def creatAnkiCard(card):
+    """
+    Creates an anki card from the given data.
+    """
+    question, answer = card
+
+    my_note = genanki.Note(
+    model=my_model,
+    fields=[f'{question}', f'{answer}'])
+
+    deck_id = random.randrange(1 << 30, 1 << 31)
+
+    print(deck_id)
+
+    my_deck = genanki.Deck(deck_id, "Vocabulary")
+    my_deck.add_note(my_note)
+
+    # save card
+    anki_folder = scriptDirectory + "\Anki"
+    date = datetime.now()
+    anki_questions_file = anki_folder + f"\\vocabulary.apkg"
+    genanki.Package(my_deck).write_to_file(anki_questions_file)
+
+creatAnkiCard(cards[0])
+
+def createAnkiDeck(cards):
     pass
+
+
+
