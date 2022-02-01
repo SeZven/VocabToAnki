@@ -15,7 +15,7 @@ pytesseract.pytesseract.tesseract_cmd = r"D:\Tesseract-OCR\tesseract.exe"
 custom_config = r'--oem 3 --psm 6' #read line by line ( or row by row)
 result = pytesseract.image_to_string(img, lang="deu", config=custom_config)
 
-result.splitlines()
+result = result.splitlines()
 
 
 
@@ -27,11 +27,12 @@ line0 = "bedroom ['bedru:m] Schlafzimmer"
 def findQuestionAndAnswer(row):
     """
     The function takes in a row of the vocabulary sheet and returns
-    the question and answer
+    the question and answer.
     """
 
     answer = ""
     question = ""
+    card = []
 
     position = 0
     for char in row:
@@ -48,4 +49,20 @@ def findQuestionAndAnswer(row):
     return card
 
 
-print(findQuestionAndAnswer(line0))
+#print(findQuestionAndAnswer(line0))
+
+def creatAnkiData(data):
+    """
+    The fuction take in the vocabulary sheet and turns it into
+    a list of [question, answer] and removes empty rows.
+    """
+    cards = []
+    for row in data:
+        print(row)
+        cards.append(findQuestionAndAnswer(row))
+    cards = [x for x in cards if x != []] #remove empty lines
+    return cards
+
+cards = creatAnkiData(result)
+
+print(cards)
