@@ -5,7 +5,7 @@ import genanki
 import random
 
 """
-Turn vocabulary sheet image into text.
+Turn vocabulary sheet image into string.
 One row consists of an english and the corresponding german vocabulary.
 """
 
@@ -17,20 +17,41 @@ os.chdir(scriptDirectory + "\Images")
 
 img = cv2.imread("img(0).png")
 
+# Add pytesseract.exe location
 pytesseract.pytesseract.tesseract_cmd = r"D:\Tesseract-OCR\tesseract.exe"
-
 
 custom_config = r'--oem 3 --psm 6' #read line by line ( or row by row)
 result = pytesseract.image_to_string(img, lang="deu", config=custom_config)
 
 result = result.splitlines()
 
-
-
 #print(result)
 
+"""
+Creat model that defines fields an cards for the type of note (flash card)
+"""
+model_id = random.randrange(1 << 30, 1 << 31)
+
+print(model_id)
+
+my_model = genanki.Model(model_id ,
+  'Knowledge',
+  fields=[
+    {'name': 'Question'},
+    {'name': 'Answer'},
+  ],
+  templates=[
+    {
+      'name': 'Card type 1',
+      'qfmt': '{{Question}}',
+      'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
+    },
+  ])
+
+#-----------------#
+
 cards = []
-line0 = "bedroom ['bedru:m] Schlafzimmer"
+#line0 = "bedroom ['bedru:m] Schlafzimmer"
 
 def findQuestionAndAnswer(row):
     """
