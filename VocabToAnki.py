@@ -5,7 +5,7 @@ import os
 # Directory dieses Programms
 scriptDirectory = os.path.dirname(os.path.abspath(__file__))
 # Setzte Directory auf den diese Programms um Bild aufrufen zu können
-os.chdir(scriptDirectory)
+os.chdir(scriptDirectory + "\Images")
 
 img = cv2.imread("img(0).png")
 
