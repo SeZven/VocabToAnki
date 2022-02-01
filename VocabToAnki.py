@@ -36,7 +36,7 @@ model_id = random.randrange(1 << 30, 1 << 31)
 print(model_id)
 
 my_model = genanki.Model(model_id ,
-  'Knowledge',
+  'Vocabulary',
   fields=[
     {'name': 'Question'},
     {'name': 'Answer'},
@@ -44,7 +44,7 @@ my_model = genanki.Model(model_id ,
   templates=[
     {
       'name': 'Card type 1',
-      'qfmt': '{{Question}}',
+      'qfmt': '{{Question}}<hr id="answer">{{type:Answer}}',
       'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
     },
   ])
