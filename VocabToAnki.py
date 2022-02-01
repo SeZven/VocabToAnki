@@ -1,10 +1,18 @@
 from distutils.command.config import config
 import cv2, pytesseract
 import os
+import genanki
+import random
 
-# Directory dieses Programms
+"""
+Turn vocabulary sheet image into text.
+One row consists of an english and the corresponding german vocabulary.
+"""
+
+# Directory of the programm
 scriptDirectory = os.path.dirname(os.path.abspath(__file__))
-# Setzte Directory auf den diese Programms um Bild aufrufen zu können
+# Set directory to directory of the programm location + subfolder \Images, where the images 
+# are stored to read image
 os.chdir(scriptDirectory + "\Images")
 
 img = cv2.imread("img(0).png")
@@ -19,7 +27,7 @@ result = result.splitlines()
 
 
 
-print(result)
+#print(result)
 
 cards = []
 line0 = "bedroom ['bedru:m] Schlafzimmer"
@@ -58,7 +66,7 @@ def creatAnkiData(data):
     """
     cards = []
     for row in data:
-        print(row)
+        #print(row)
         cards.append(findQuestionAndAnswer(row))
     cards = [x for x in cards if x != []] #remove empty lines
     return cards
@@ -66,3 +74,6 @@ def creatAnkiData(data):
 cards = creatAnkiData(result)
 
 print(cards)
+
+def creatAnkiDeck(cards):
+    pass
