@@ -99,31 +99,41 @@ print(cards)
 
 def creatAnkiCard(card):
     """
-    Creates an anki card from the given data.
+    Creates an anki card from the given data and retuns it.
     """
     question, answer = card
 
-    my_note = genanki.Note(
+    note = genanki.Note(
     model=my_model,
     fields=[f'{question}', f'{answer}'])
 
-    deck_id = random.randrange(1 << 30, 1 << 31)
+    return note
+
+    
+#creatAnkiCard(cards[0])
+
+def createAnkiDeck(cards):
+    """
+    Creat anki deck and save it to a file.
+    """
+    deck_id = random.randrange(1 << 30, 1 << 31) # Every deck needs an id
 
     print(deck_id)
 
-    my_deck = genanki.Deck(deck_id, "Vocabulary")
-    my_deck.add_note(my_note)
+    deck = genanki.Deck(deck_id, "Vocabulary")
+
+    for card in cards:
+
+        deck.add_note(creatAnkiCard(card))
 
     # save card
     anki_folder = scriptDirectory + "\Anki"
-    date = datetime.now()
+    #date = datetime.now()
     anki_questions_file = anki_folder + f"\\vocabulary.apkg"
-    genanki.Package(my_deck).write_to_file(anki_questions_file)
+    genanki.Package(deck).write_to_file(anki_questions_file)
 
-creatAnkiCard(cards[0])
+createAnkiDeck(cards)
 
-def createAnkiDeck(cards):
-    pass
 
 
 
