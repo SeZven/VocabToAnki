@@ -44,7 +44,7 @@ my_model = genanki.Model(model_id ,
   templates=[
     {
       'name': 'Card type 1',
-      'qfmt': '{{Question}}<hr id="answer">{{type:Answer}}',
+      'qfmt': '{{Question}}<hr>{{type:Answer}}',
       'afmt': '{{FrontSide}}<hr id="answer">{{Answer}}',
     },
   ])
