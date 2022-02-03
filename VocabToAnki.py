@@ -1,12 +1,7 @@
-#from distutils.command.config import config
-from json.tool import main
-from unittest import result
 import cv2, pytesseract
 import os
 import genanki
 import random
-#from datetime import datetime
-
 
 
 # Directory of the programm
@@ -59,9 +54,6 @@ my_model = genanki.Model(model_id ,
 
 #-----------------#
 
-cards = []
-#line0 = "bedroom ['bedru:m] Schlafzimmer"
-
 def findQuestionAndAnswer(row):
     """
     The function takes in a row of the vocabulary sheet and returns
@@ -87,8 +79,6 @@ def findQuestionAndAnswer(row):
     return card
 
 
-#print(findQuestionAndAnswer(line0))
-
 def creatAnkiData(data):
     """
     The fuction take in the vocabulary sheet and turns it into
@@ -102,9 +92,6 @@ def creatAnkiData(data):
     return cards
 
 
-
-#print(cards)
-
 def creatAnkiCard(card):
     """
     Creates an anki card from the given data and retuns it.
@@ -117,8 +104,6 @@ def creatAnkiCard(card):
 
     return note
 
-    
-#creatAnkiCard(cards[0])
 
 def createAnkiDeck(cards, image):
     """
@@ -136,13 +121,10 @@ def createAnkiDeck(cards, image):
 
     # save card
     anki_folder = SCRIPTDIRECTORY + "\Anki"
-    #date = datetime.now()
     anki_questions_file = anki_folder + f"\\vocabulary_{image}.apkg"
     genanki.Package(deck).write_to_file(anki_questions_file)
 
-#result = imageToText(IMAGES[0])
-#cards = creatAnkiData(result)
-#createAnkiDeck(cards)
+
 
 if __name__ == '__main__':
     for image in IMAGES:
