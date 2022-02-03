@@ -120,7 +120,7 @@ def creatAnkiCard(card):
     
 #creatAnkiCard(cards[0])
 
-def createAnkiDeck(cards):
+def createAnkiDeck(cards, image):
     """
     Creat anki deck and save it to a file.
     """
@@ -137,14 +137,16 @@ def createAnkiDeck(cards):
     # save card
     anki_folder = SCRIPTDIRECTORY + "\Anki"
     #date = datetime.now()
-    anki_questions_file = anki_folder + f"\\vocabulary_{IMAGES[0]}.apkg"
+    anki_questions_file = anki_folder + f"\\vocabulary_{image}.apkg"
     genanki.Package(deck).write_to_file(anki_questions_file)
 
-result = imageToText(IMAGES[0])
-cards = creatAnkiData(result)
-createAnkiDeck(cards)
+#result = imageToText(IMAGES[0])
+#cards = creatAnkiData(result)
+#createAnkiDeck(cards)
 
 if __name__ == '__main__':
     for image in IMAGES:
-        text = i
+        text = imageToText(image)
+        cards = creatAnkiData(text)
+        createAnkiDeck(cards,image)
 
