@@ -71,7 +71,8 @@ def findQuestionAndAnswer(row):
             answer = row[0:position-1]
         if char == "]":
             question = row[position+2:]
-            card = [question,answer]
+            if answer != "":
+                card = [question,answer]
             break
 
         position += 1
