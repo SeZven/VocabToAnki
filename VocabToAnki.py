@@ -1,4 +1,5 @@
 #from distutils.command.config import config
+from json.tool import main
 from unittest import result
 import cv2, pytesseract
 import os
@@ -22,7 +23,7 @@ CUSTOM_CONFIG = r'--oem 3 --psm 6' #read line by line ( or row by row)
 IMAGES = os.listdir()
 
 
-def imgageToText(image):
+def imageToText(image):
     """
     Turn vocabulary sheet image into string.
     One row consists of an english and the corresponding german vocabulary.
@@ -139,10 +140,11 @@ def createAnkiDeck(cards):
     anki_questions_file = anki_folder + f"\\vocabulary_{IMAGES[0]}.apkg"
     genanki.Package(deck).write_to_file(anki_questions_file)
 
-result = imgageToText(IMAGES[0])
+result = imageToText(IMAGES[0])
 cards = creatAnkiData(result)
 createAnkiDeck(cards)
 
-
-
+if __name__ == '__main__':
+    for image in IMAGES:
+        text = i
 
