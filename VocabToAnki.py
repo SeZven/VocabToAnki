@@ -3,6 +3,7 @@ import os
 import genanki
 import random
 
+random.seed(0)
 
 # Directory of the programm
 SCRIPTDIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -27,6 +28,8 @@ def imageToText(image):
     img = cv2.imread(image)
 
     result = pytesseract.image_to_string(img, lang="deu", config=CUSTOM_CONFIG)
+
+    print(result)
 
     return result.splitlines()
 
@@ -63,15 +66,17 @@ def findQuestionAndAnswer(row):
     answer = ""
     question = ""
     card = []
+    answerFound = False
 
     position = 0
     for char in row:
 
-        if char == "[":
+        if char == "[" and answerFound == False:
             answer = row[0:position-1]
+            answerFound = True
         if char == "]":
             question = row[position+2:]
-            if answer != "":
+            if answerFound == True:
                 card = [question,answer]
             break
 
@@ -132,4 +137,5 @@ if __name__ == '__main__':
         text = imageToText(image)
         cards = creatAnkiData(text)
         createAnkiDeck(cards,image)
+
 
