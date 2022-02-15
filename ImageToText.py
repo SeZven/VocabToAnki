@@ -1,8 +1,5 @@
 import cv2, pytesseract
 import os
-import random
-
-random.seed(0)
 
 # Directory of the programm
 SCRIPTDIRECTORY = os.path.dirname(os.path.abspath(__file__))

@@ -1,8 +1,9 @@
 # Text files
 *.txt
 
-# Portable Network Graphics
+# Portable Network Graphics / Joint Photographic Group
 *.png
+*.jpg
 
 # Anki files
 *.apkg
